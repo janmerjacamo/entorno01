@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_employee_gt_experience_user,hr.employee.gt.experience.user,model_hr_employee_gt_experience,hr.group_hr_user,1,1,1,1
+access_hr_employee_gt_reference_user,hr.employee.gt.reference.user,model_hr_employee_gt_reference,hr.group_hr_user,1,1,1,1
+access_hr_employee_gt_education_user,hr.employee.gt.education.user,model_hr_employee_gt_education,hr.group_hr_user,1,1,1,1
+access_hr_employee_gt_technical_study_user,hr.employee.gt.technical.study.user,model_hr_employee_gt_technical_study,hr.group_hr_user,1,1,1,1
+access_hr_employee_gt_document_user,hr.employee.gt.document.user,model_hr_employee_gt_document,hr.group_hr_user,1,1,1,1
