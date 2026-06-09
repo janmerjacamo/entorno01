@@ -1,0 +1,18 @@
+<odoo>
+    <menuitem id="menu_localiza_crm_operacion" name="Localiza CRM" parent="crm.crm_menu_root" sequence="5"/>
+    <menuitem id="menu_localiza_crm_leads" name="Oportunidades" parent="menu_localiza_crm_operacion" action="action_localiza_crm_leads" sequence="10"/>
+    <menuitem id="menu_localiza_crm_partners" name="Clientes" parent="menu_localiza_crm_operacion" action="action_localiza_partners" sequence="20"/>
+    <menuitem id="menu_localiza_crm_calendar" name="Eventos / tareas" parent="menu_localiza_crm_operacion" action="action_localiza_calendar_events" sequence="30"/>
+    <menuitem id="menu_localiza_crm_orders" name="Pedidos" parent="menu_localiza_crm_operacion" action="action_localiza_sale_orders" sequence="40"/>
+
+    <menuitem id="menu_localiza_crm_activities" name="Actividades Localiza" parent="crm.crm_menu_root" sequence="6"/>
+    <menuitem id="menu_localiza_crm_activities_today" name="Actividades de hoy" parent="menu_localiza_crm_activities" action="action_localiza_activities_today" sequence="10"/>
+    <menuitem id="menu_localiza_crm_activities_overdue" name="Actividades vencidas" parent="menu_localiza_crm_activities" action="action_localiza_activities_overdue" sequence="20"/>
+    <menuitem id="menu_localiza_crm_activities_pending" name="Actividades pendientes" parent="menu_localiza_crm_activities" action="action_localiza_activities_pending" sequence="30"/>
+
+    <menuitem id="menu_localiza_crm_reports" name="Informes Localiza" parent="crm.crm_menu_root" sequence="7"/>
+    <menuitem id="menu_localiza_crm_report_open" name="Tratos abiertos" parent="menu_localiza_crm_reports" action="action_localiza_crm_leads" sequence="10"/>
+    <menuitem id="menu_localiza_crm_report_month" name="Ventas del mes" parent="menu_localiza_crm_reports" action="action_localiza_crm_leads_month" sequence="20"/>
+    <menuitem id="menu_localiza_crm_report_today" name="Oportunidades creadas hoy" parent="menu_localiza_crm_reports" action="action_localiza_crm_leads_created_today" sequence="30"/>
+    <menuitem id="menu_localiza_crm_stage_history" name="Historial de fases" parent="menu_localiza_crm_reports" action="action_localiza_crm_stage_history" sequence="40"/>
+</odoo>

@@ -1,0 +1,225 @@
+<odoo>
+    <record id="view_localiza_crm_lead_kanban" model="ir.ui.view">
+        <field name="name">crm.lead.localiza.kanban</field>
+        <field name="model">crm.lead</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="stage_id" class="o_kanban_small_column" quick_create="false" sample="1">
+                <field name="name"/>
+                <field name="stage_id"/>
+                <field name="expected_revenue" sum="Total etapa"/>
+                <field name="localiza_weighted_revenue" sum="Ponderado"/>
+                <field name="partner_id"/>
+                <field name="partner_name"/>
+                <field name="localiza_owner"/>
+                <field name="localiza_due_datetime"/>
+                <field name="localiza_sequence"/>
+                <field name="priority"/>
+                <field name="user_id"/>
+                <field name="company_currency"/>
+                <field name="activity_state"/>
+                <progressbar field="activity_state" colors="{'planned': 'success', 'today': 'warning', 'overdue': 'danger'}"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record">
+                            <div class="o_kanban_record_details">
+                                <strong class="o_kanban_record_title"><field name="name"/></strong>
+                                <div class="text-muted"><field name="localiza_sequence"/></div>
+                                <div><field name="localiza_owner"/></div>
+                                <div><field name="partner_id"/></div>
+                                <div class="mt8">
+                                    <span class="fw-bold"><field name="expected_revenue" widget="monetary" options="{'currency_field': 'company_currency'}"/></span>
+                                </div>
+                                <div class="text-muted">
+                                    Ponderado: <field name="localiza_weighted_revenue" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                                </div>
+                                <div class="text-danger" t-if="record.localiza_due_datetime.raw_value"><field name="localiza_due_datetime"/></div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left"><field name="priority" widget="priority"/></div>
+                                    <div class="oe_kanban_bottom_right"><field name="user_id" widget="many2one_avatar_user"/></div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_localiza_crm_lead_list" model="ir.ui.view">
+        <field name="name">crm.lead.localiza.list</field>
+        <field name="model">crm.lead</field>
+        <field name="arch" type="xml">
+            <list string="Oportunidades Localiza" multi_edit="1">
+                <field name="localiza_sequence" optional="show"/>
+                <field name="name" string="Oportunidad"/>
+                <field name="localiza_owner" optional="show"/>
+                <field name="partner_id" string="Cliente" optional="show"/>
+                <field name="localiza_product" string="Tipo de producto" optional="show"/>
+                <field name="create_uid" string="Quien crea la oportunidad" optional="show"/>
+                <field name="localiza_sale_modality" optional="show"/>
+                <field name="localiza_payment_type" optional="show"/>
+                <field name="expected_revenue" string="Ingreso esperado" sum="Total" optional="show"/>
+                <field name="localiza_weighted_revenue" sum="Ponderado" optional="show"/>
+                <field name="probability" optional="show"/>
+                <field name="stage_id" string="Etapa" optional="show"/>
+                <field name="localiza_due_datetime" optional="show"/>
+                <field name="date_deadline" string="Fecha cierre esperado" optional="show"/>
+                <field name="create_date" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_localiza_crm_lead_form" model="ir.ui.view">
+        <field name="name">crm.lead.localiza.form</field>
+        <field name="model">crm.lead</field>
+        <field name="arch" type="xml">
+            <form string="Oportunidad Localiza">
+                <header>
+                    <button name="action_localiza_mark_won" string="Cerrar ganado" type="object" class="btn-primary"/>
+                    <button name="action_localiza_mark_lost" string="Cerrar perdido" type="object"/>
+                    <button name="action_localiza_create_event_task" string="Nuevo evento/tarea" type="object"/>
+                    <button name="action_localiza_create_activity" string="Actividad/recordatorio" type="object"/>
+                    <field name="stage_id" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="action_localiza_view_stage_history" icon="fa-history">
+                            <field name="localiza_stage_history_count" widget="statinfo" string="Fases"/>
+                        </button>
+                        <button class="oe_stat_button" type="object" name="action_localiza_view_calendar_events" icon="fa-calendar">
+                            <field name="localiza_calendar_event_count" widget="statinfo" string="Eventos/Tareas"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Nombre de oportunidad" required="1"/></h1>
+                        <div><field name="localiza_sequence" readonly="1"/></div>
+                    </div>
+                    <group>
+                        <group string="Información comercial">
+                            <field name="localiza_owner" required="1"/>
+                            <field name="partner_id" string="Cliente"/>
+                            <field name="contact_name"/>
+                            <field name="email_from"/>
+                            <field name="phone"/>
+                            <field name="localiza_client_classification"/>
+                        </group>
+                        <group string="Valor y cierre">
+                            <field name="expected_revenue" string="Ingreso esperado"/>
+                            <field name="probability"/>
+                            <field name="localiza_weighted_revenue" readonly="1"/>
+                            <field name="date_deadline" string="Fecha cierre esperado"/>
+                            <field name="localiza_due_datetime"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Origen">
+                            <field name="localiza_source"/>
+                            <field name="localiza_campaign_source" invisible="localiza_source != 'campana'"/>
+                            <field name="localiza_prospect_source"/>
+                            <field name="medium_id"/>
+                            <field name="campaign_id"/>
+                        </group>
+                        <group string="Producto y modalidad">
+                            <field name="localiza_product"/>
+                            <field name="localiza_sale_modality"/>
+                            <field name="localiza_payment_type"/>
+                            <field name="create_uid" string="Quien crea la oportunidad" readonly="1"/>
+                            <field name="user_id" string="Vendedor Odoo"/>
+                            <field name="team_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Resumen">
+                            <field name="localiza_summary" placeholder="Escriba aquí el resumen, seguimiento o solicitud del cliente."/>
+                        </page>
+                        <page string="Historial de fases">
+                            <field name="localiza_stage_history_ids" readonly="1">
+                                <list>
+                                    <field name="previous_stage_id"/>
+                                    <field name="new_stage_id"/>
+                                    <field name="change_date"/>
+                                    <field name="user_id"/>
+                                    <field name="expected_revenue"/>
+                                    <field name="weighted_revenue"/>
+                                    <field name="probability"/>
+                                    <field name="days_in_previous_stage"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Eventos / tareas">
+                            <field name="localiza_calendar_event_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="start"/>
+                                    <field name="stop"/>
+                                    <field name="localiza_owner"/>
+                                    <field name="localiza_task_type"/>
+                                    <field name="localiza_task_state"/>
+                                    <field name="localiza_priority"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notas internas">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_localiza_crm_lead_search" model="ir.ui.view">
+        <field name="name">crm.lead.localiza.search</field>
+        <field name="model">crm.lead</field>
+        <field name="arch" type="xml">
+            <search string="Oportunidades Localiza">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="localiza_owner"/>
+                <field name="localiza_product"/>
+                <field name="stage_id"/>
+                <filter name="open" string="Tratos abiertos" domain="[('type','=','opportunity'), ('probability','&lt;',100), ('active','=',True)]"/>
+                <filter name="created_today" string="Creadas hoy" domain="[('create_date','&gt;=', context_today().strftime('%Y-%m-%d 00:00:00'))]"/>
+                <filter name="month" string="Mes actual" date="create_date" default_period="this_month"/>
+                <filter name="last_3_months" string="Últimos 3 meses" domain="[('create_date','&gt;=', (context_today() - relativedelta(months=3)).strftime('%Y-%m-%d 00:00:00'))]"/>
+                <filter name="next_3_months" string="Próximos 3 meses" domain="[('date_deadline','&gt;=', context_today()), ('date_deadline','&lt;=', context_today() + relativedelta(months=3))]"/>
+                <separator/>
+                <filter name="group_stage" string="Etapa" context="{'group_by': 'stage_id'}"/>
+                <filter name="group_owner" string="Propietario Localiza" context="{'group_by': 'localiza_owner'}"/>
+                <filter name="group_salesperson" string="Vendedor Odoo" context="{'group_by': 'user_id'}"/>
+                <filter name="group_month" string="Mes" context="{'group_by': 'create_date:month'}"/>
+                <filter name="group_close_month" string="Mes cierre esperado" context="{'group_by': 'date_deadline:month'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_localiza_crm_leads" model="ir.actions.act_window">
+        <field name="name">Oportunidades Localiza</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">kanban,list,form,pivot,graph,calendar,activity</field>
+        <field name="domain">[('type','=','opportunity')]</field>
+        <field name="context">{'default_type': 'opportunity', 'search_default_group_stage': 1}</field>
+        <field name="search_view_id" ref="view_localiza_crm_lead_search"/>
+        <field name="views" eval="[(ref('view_localiza_crm_lead_kanban'), 'kanban'), (ref('view_localiza_crm_lead_list'), 'list'), (ref('view_localiza_crm_lead_form'), 'form'), (False, 'pivot'), (False, 'graph'), (False, 'calendar'), (False, 'activity')]"/>
+    </record>
+
+    <record id="action_localiza_crm_leads_month" model="ir.actions.act_window">
+        <field name="name">Ventas del mes</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">list,pivot,graph,kanban,form</field>
+        <field name="domain">[('type','=','opportunity')]</field>
+        <field name="context">{'search_default_month': 1, 'search_default_group_owner': 1}</field>
+        <field name="search_view_id" ref="view_localiza_crm_lead_search"/>
+    </record>
+
+    <record id="action_localiza_crm_leads_created_today" model="ir.actions.act_window">
+        <field name="name">Oportunidades creadas hoy</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="domain">[('type','=','opportunity')]</field>
+        <field name="context">{'search_default_created_today': 1}</field>
+        <field name="search_view_id" ref="view_localiza_crm_lead_search"/>
+    </record>
+</odoo>

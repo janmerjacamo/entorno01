@@ -1,0 +1,108 @@
+<odoo>
+    <record id="view_localiza_res_partner_list" model="ir.ui.view">
+        <field name="name">res.partner.localiza.list</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <list string="Clientes Localiza">
+                <field name="name"/>
+                <field name="localiza_owner"/>
+                <field name="create_uid" string="Quien crea el contacto"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="mobile"/>
+                <field name="vat"/>
+                <field name="country_id"/>
+                <field name="localiza_duplicate_count"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_localiza_res_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.localiza.form</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <form string="Cliente Localiza">
+                <header>
+                    <button name="action_localiza_create_opportunity" string="Nueva oportunidad" type="object" class="btn-primary"/>
+                    <button name="action_localiza_create_event_task" string="Nuevo evento/tarea" type="object"/>
+                    <button name="action_localiza_create_activity" string="Actividad/recordatorio" type="object"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="action_localiza_view_duplicates" icon="fa-copy">
+                            <field name="localiza_duplicate_count" widget="statinfo" string="Duplicados"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" required="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Datos principales">
+                            <field name="company_type"/>
+                            <field name="vat"/>
+                            <field name="email"/>
+                            <field name="phone"/>
+                            <field name="mobile"/>
+                            <field name="website"/>
+                        </group>
+                        <group string="Comercial">
+                            <field name="localiza_owner"/>
+                            <field name="create_uid" string="Quien crea el contacto" readonly="1"/>
+                            <field name="user_id"/>
+                            <field name="category_id" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <group string="Dirección">
+                        <field name="street"/>
+                        <field name="street2"/>
+                        <field name="city"/>
+                        <field name="state_id"/>
+                        <field name="country_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Contactos">
+                            <field name="child_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="function"/>
+                                    <field name="email"/>
+                                    <field name="phone"/>
+                                    <field name="mobile"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notas internas">
+                            <field name="comment"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_localiza_res_partner_search" model="ir.ui.view">
+        <field name="name">res.partner.localiza.search</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <search string="Clientes Localiza">
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="vat"/>
+                <field name="localiza_owner"/>
+                <filter name="group_owner" string="Comercial" context="{'group_by': 'localiza_owner'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_localiza_partners" model="ir.actions.act_window">
+        <field name="name">Clientes Localiza</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">list,form,kanban</field>
+        <field name="context">{'default_is_company': True}</field>
+        <field name="search_view_id" ref="view_localiza_res_partner_search"/>
+        <field name="views" eval="[(ref('view_localiza_res_partner_list'), 'list'), (ref('view_localiza_res_partner_form'), 'form'), (False, 'kanban')]"/>
+    </record>
+</odoo>

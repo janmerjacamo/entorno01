@@ -1,0 +1,24 @@
+<odoo>
+    <record id="view_localiza_sale_order_list" model="ir.ui.view">
+        <field name="name">sale.order.localiza.list</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <list string="Pedidos Localiza">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="date_order"/>
+                <field name="state"/>
+                <field name="amount_total" sum="Total"/>
+                <field name="localiza_sale_modality"/>
+                <field name="localiza_payment_type"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_localiza_sale_orders" model="ir.actions.act_window">
+        <field name="name">Pedidos Localiza</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">list,form,kanban,pivot,graph</field>
+        <field name="views" eval="[(ref('view_localiza_sale_order_list'), 'list'), (False, 'form'), (False, 'kanban'), (False, 'pivot'), (False, 'graph')]"/>
+    </record>
+</odoo>

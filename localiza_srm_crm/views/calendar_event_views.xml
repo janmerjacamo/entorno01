@@ -1,0 +1,84 @@
+<odoo>
+    <record id="view_localiza_calendar_event_list" model="ir.ui.view">
+        <field name="name">calendar.event.localiza.list</field>
+        <field name="model">calendar.event</field>
+        <field name="arch" type="xml">
+            <list string="Eventos / tareas Localiza">
+                <field name="name"/>
+                <field name="start"/>
+                <field name="stop"/>
+                <field name="localiza_opportunity_id"/>
+                <field name="localiza_partner_id"/>
+                <field name="localiza_owner"/>
+                <field name="localiza_task_type" string="Tipo de evento/tarea"/>
+                <field name="localiza_task_state" string="Estado"/>
+                <field name="localiza_priority"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_localiza_calendar_event_form" model="ir.ui.view">
+        <field name="name">calendar.event.localiza.form</field>
+        <field name="model">calendar.event</field>
+        <field name="arch" type="xml">
+            <form string="Evento / tarea Localiza">
+                <sheet>
+                    <div class="oe_title"><h1><field name="name" required="1"/></h1></div>
+                    <group>
+                        <group string="Programación">
+                            <field name="start" required="1"/>
+                            <field name="stop" required="1"/>
+                            <field name="allday"/>
+                            <field name="user_id"/>
+                        </group>
+                        <group string="Relación CRM">
+                            <field name="localiza_opportunity_id"/>
+                            <field name="localiza_partner_id"/>
+                            <field name="partner_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Seguimiento">
+                            <field name="localiza_owner"/>
+                            <field name="localiza_task_type" string="Tipo de evento/tarea"/>
+                            <field name="localiza_task_state" string="Estado"/>
+                            <field name="localiza_priority"/>
+                        </group>
+                        <group string="Evidencia">
+                            <field name="localiza_evidence" filename="localiza_evidence_filename"/>
+                            <field name="localiza_evidence_filename" invisible="1"/>
+                        </group>
+                    </group>
+                    <group string="Observaciones">
+                        <field name="description" nolabel="1"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_localiza_calendar_event_search" model="ir.ui.view">
+        <field name="name">calendar.event.localiza.search</field>
+        <field name="model">calendar.event</field>
+        <field name="arch" type="xml">
+            <search string="Eventos / tareas Localiza">
+                <field name="name"/>
+                <field name="localiza_opportunity_id"/>
+                <field name="localiza_partner_id"/>
+                <field name="localiza_owner"/>
+                <filter name="today" string="Hoy" domain="[('start','&gt;=', context_today().strftime('%Y-%m-%d 00:00:00')), ('start','&lt;=', context_today().strftime('%Y-%m-%d 23:59:59'))]"/>
+                <filter name="group_owner" string="Responsable" context="{'group_by': 'localiza_owner'}"/>
+                <filter name="group_state" string="Estado" context="{'group_by': 'localiza_task_state'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_localiza_calendar_events" model="ir.actions.act_window">
+        <field name="name">Eventos / tareas Localiza</field>
+        <field name="res_model">calendar.event</field>
+        <field name="view_mode">calendar,list,form</field>
+        <field name="search_view_id" ref="view_localiza_calendar_event_search"/>
+        <field name="views" eval="[(False, 'calendar'), (ref('view_localiza_calendar_event_list'), 'list'), (ref('view_localiza_calendar_event_form'), 'form')]"/>
+    </record>
+</odoo>

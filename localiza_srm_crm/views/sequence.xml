@@ -1,0 +1,9 @@
+<odoo noupdate="1">
+    <record id="seq_localiza_crm_lead" model="ir.sequence">
+        <field name="name">Oportunidad Localiza</field>
+        <field name="code">localiza.crm.lead</field>
+        <field name="prefix">OPP-</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo>
