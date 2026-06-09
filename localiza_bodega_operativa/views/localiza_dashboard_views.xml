@@ -1,0 +1,41 @@
+<odoo>
+    <record id="view_localiza_dashboard_form" model="ir.ui.view">
+        <field name="name">localiza.dashboard.form</field>
+        <field name="model">localiza.dashboard</field>
+        <field name="arch" type="xml">
+            <form string="Tablero Operativo" create="0" delete="0">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>Tablero Operativo Localiza</h1>
+                        <p class="text-muted">Resumen general de bodega, asignaciones, puestos y GPS.</p>
+                    </div>
+                    <group string="Indicadores principales">
+                        <group>
+                            <field name="puestos_activos" readonly="1"/>
+                            <field name="articulos_total" readonly="1"/>
+                            <field name="stock_bodega" readonly="1"/>
+                            <field name="pendientes" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="gps_total" readonly="1"/>
+                            <field name="gps_instalados" readonly="1"/>
+                            <field name="asignaciones_mes" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Accesos rapidos">
+                        <button type="action" name="%(action_localiza_articulo)d" string="Ver articulos" class="btn-primary"/>
+                        <button type="action" name="%(action_localiza_gps)d" string="Ver GPS"/>
+                        <button type="action" name="%(action_localiza_asignacion)d" string="Ver asignaciones"/>
+                        <button type="action" name="%(action_localiza_importacion)d" string="Importar Excel"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_localiza_dashboard" model="ir.actions.act_window">
+        <field name="name">Tablero</field>
+        <field name="res_model">localiza.dashboard</field>
+        <field name="view_mode">form</field>
+        <field name="res_id" ref="localiza_dashboard_main"/>
+    </record>
+</odoo>

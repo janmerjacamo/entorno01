@@ -1,0 +1,11 @@
+<odoo>
+    <menuitem id="menu_localiza_root" name="Bodega Operativa" sequence="10" web_icon="stock,static/description/icon.png"/>
+    <menuitem id="menu_localiza_dashboard" name="Tablero" parent="menu_localiza_root" action="action_localiza_dashboard" sequence="1"/>
+    <menuitem id="menu_localiza_operacion" name="Operacion" parent="menu_localiza_root" sequence="10"/>
+    <menuitem id="menu_localiza_asignaciones" name="Asignaciones" parent="menu_localiza_operacion" action="action_localiza_asignacion" sequence="10"/>
+    <menuitem id="menu_localiza_puestos" name="Puestos" parent="menu_localiza_operacion" action="action_localiza_puesto" sequence="20"/>
+    <menuitem id="menu_localiza_inventario" name="Inventario Operativo" parent="menu_localiza_root" sequence="20"/>
+    <menuitem id="menu_localiza_articulos" name="Articulos" parent="menu_localiza_inventario" action="action_localiza_articulo" sequence="10"/>
+    <menuitem id="menu_localiza_gps" name="GPS" parent="menu_localiza_inventario" action="action_localiza_gps" sequence="20"/>
+    <menuitem id="menu_localiza_import" name="Importaciones Excel" parent="menu_localiza_root" action="action_localiza_importacion" sequence="90"/>
+</odoo>

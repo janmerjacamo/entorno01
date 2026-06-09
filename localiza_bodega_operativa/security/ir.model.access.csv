@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_localiza_puesto_user,localiza.puesto user,model_localiza_puesto,base.group_user,1,1,1,1
+access_localiza_articulo_user,localiza.articulo user,model_localiza_articulo,base.group_user,1,1,1,1
+access_localiza_gps_user,localiza.gps user,model_localiza_gps,base.group_user,1,1,1,1
+access_localiza_asignacion_user,localiza.asignacion user,model_localiza_asignacion,base.group_user,1,1,1,1
+access_localiza_importacion_user,localiza.importacion user,model_localiza_importacion,base.group_user,1,1,1,1
+access_localiza_importacion_linea_user,localiza.importacion.linea user,model_localiza_importacion_linea,base.group_user,1,1,1,1
+access_localiza_dashboard_user,localiza.dashboard user,model_localiza_dashboard,base.group_user,1,1,1,1
