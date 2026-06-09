@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="seq_localiza_form_delivery" model="ir.sequence">
+        <field name="name">Formulario Entrega Bodega</field>
+        <field name="code">localiza.operational.form.delivery</field>
+        <field name="prefix">FEB-%(year)s-</field>
+        <field name="padding">5</field>
+    </record>
+    <record id="seq_localiza_form_installation" model="ir.sequence">
+        <field name="name">Formulario Instalación Puesto</field>
+        <field name="code">localiza.operational.form.installation</field>
+        <field name="prefix">FIP-%(year)s-</field>
+        <field name="padding">5</field>
+    </record>
+    <record id="seq_localiza_form_inventory" model="ir.sequence">
+        <field name="name">Formulario Inventario Puesto</field>
+        <field name="code">localiza.operational.form.inventory</field>
+        <field name="prefix">FIV-%(year)s-</field>
+        <field name="padding">5</field>
+    </record>
+    <record id="seq_localiza_form_tool" model="ir.sequence">
+        <field name="name">Formulario Prestamo Herramientas</field>
+        <field name="code">localiza.operational.form.tool</field>
+        <field name="prefix">FPH-%(year)s-</field>
+        <field name="padding">5</field>
+    </record>
+    <record id="seq_localiza_form_other" model="ir.sequence">
+        <field name="name">Formulario Operativo Otro</field>
+        <field name="code">localiza.operational.form.other</field>
+        <field name="prefix">FO-%(year)s-</field>
+        <field name="padding">5</field>
+    </record>
+</odoo>

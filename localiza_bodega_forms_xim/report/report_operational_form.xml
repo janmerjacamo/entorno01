@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_localiza_operational_form_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page" style="font-family: Arial, sans-serif; font-size: 12px;">
+                        <div style="border-bottom: 2px solid #1a6fce; padding-bottom: 8px; margin-bottom: 12px;">
+                            <h2 style="margin:0; color:#1a6fce;">Formulario Operativo de Bodega</h2>
+                            <div style="font-size:13px; margin-top:4px;">
+                                <strong>Folio Odoo:</strong> <span t-field="o.name"/> &amp;nbsp; | &amp;nbsp;
+                                <strong>Folio externo:</strong> <span t-field="o.external_folio"/>
+                            </div>
+                        </div>
+
+                        <table style="width:100%; border-collapse:collapse; margin-bottom:10px;">
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:6px; width:25%; background:#f5f5f5;"><strong>Tipo de formulario</strong></td>
+                                <td style="border:1px solid #ddd; padding:6px; width:25%;"><span t-field="o.form_type"/></td>
+                                <td style="border:1px solid #ddd; padding:6px; width:25%; background:#f5f5f5;"><strong>Fecha / Hora</strong></td>
+                                <td style="border:1px solid #ddd; padding:6px; width:25%;"><span t-field="o.form_date"/></td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:6px; background:#f5f5f5;"><strong>Usuario / activo origen</strong></td>
+                                <td style="border:1px solid #ddd; padding:6px;"><span t-field="o.active_user"/></td>
+                                <td style="border:1px solid #ddd; padding:6px; background:#f5f5f5;"><strong>Estado</strong></td>
+                                <td style="border:1px solid #ddd; padding:6px;"><span t-field="o.state"/></td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:6px; background:#f5f5f5;"><strong>Ubicación GPS / Mapa</strong></td>
+                                <td colspan="3" style="border:1px solid #ddd; padding:6px;"><span t-field="o.location_text"/></td>
+                            </tr>
+                        </table>
+
+                        <h4 style="color:#1a6fce; margin:12px 0 6px;">Responsables y puesto</h4>
+                        <table style="width:100%; border-collapse:collapse; margin-bottom:10px;">
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:6px; background:#f5f5f5;"><strong>Encargado entrega</strong></td>
+                                <td style="border:1px solid #ddd; padding:6px;"><span t-field="o.delivery_responsible"/></td>
+                                <td style="border:1px solid #ddd; padding:6px; background:#f5f5f5;"><strong>Persona recibe / solicita</strong></td>
+                                <td style="border:1px solid #ddd; padding:6px;"><span t-field="o.receiver_name"/></td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:6px; background:#f5f5f5;"><strong>Supervisor</strong></td>
+                                <td style="border:1px solid #ddd; padding:6px;"><span t-field="o.supervisor_name"/></td>
+                                <td style="border:1px solid #ddd; padding:6px; background:#f5f5f5;"><strong>Instalador</strong></td>
+                                <td style="border:1px solid #ddd; padding:6px;"><span t-field="o.installer_name"/></td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:6px; background:#f5f5f5;"><strong>Guardia turno</strong></td>
+                                <td style="border:1px solid #ddd; padding:6px;"><span t-field="o.guard_name"/></td>
+                                <td style="border:1px solid #ddd; padding:6px; background:#f5f5f5;"><strong>DPI receptor</strong></td>
+                                <td style="border:1px solid #ddd; padding:6px;"><span t-field="o.dpi_receiver"/></td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:6px; background:#f5f5f5;"><strong>Origen</strong></td>
+                                <td style="border:1px solid #ddd; padding:6px;"><span t-field="o.source_place"/></td>
+                                <td style="border:1px solid #ddd; padding:6px; background:#f5f5f5;"><strong>Destino / puesto</strong></td>
+                                <td style="border:1px solid #ddd; padding:6px;"><span t-field="o.destination_place"/> <span t-if="o.puesto_id"> / <span t-field="o.puesto_id"/></span></td>
+                            </tr>
+                        </table>
+
+                        <h4 style="color:#1a6fce; margin:12px 0 6px;">Control principal</h4>
+                        <table style="width:100%; border-collapse:collapse; margin-bottom:10px;">
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:6px; background:#f5f5f5;"><strong>Serie principal</strong></td>
+                                <td style="border:1px solid #ddd; padding:6px;"><span t-field="o.equipment_serial"/></td>
+                                <td style="border:1px solid #ddd; padding:6px; background:#f5f5f5;"><strong>Cantidad munición / accesorios</strong></td>
+                                <td style="border:1px solid #ddd; padding:6px;"><span t-field="o.ammunition_qty"/></td>
+                                <td style="border:1px solid #ddd; padding:6px; background:#f5f5f5;"><strong>Vencimiento</strong></td>
+                                <td style="border:1px solid #ddd; padding:6px;"><span t-field="o.expiration_date"/></td>
+                            </tr>
+                        </table>
+
+                        <h4 style="color:#1a6fce; margin:12px 0 6px;">Detalle de artículos</h4>
+                        <table style="width:100%; border-collapse:collapse; margin-bottom:10px; font-size:11px;">
+                            <thead>
+                                <tr style="background:#f5f5f5;">
+                                    <th style="border:1px solid #ddd; padding:5px;">Artículo</th>
+                                    <th style="border:1px solid #ddd; padding:5px;">Código</th>
+                                    <th style="border:1px solid #ddd; padding:5px;">Serie / IMEI</th>
+                                    <th style="border:1px solid #ddd; padding:5px;">Cantidad</th>
+                                    <th style="border:1px solid #ddd; padding:5px;">Movimiento</th>
+                                    <th style="border:1px solid #ddd; padding:5px;">Condición</th>
+                                    <th style="border:1px solid #ddd; padding:5px;">Observación</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.line_ids" t-as="l">
+                                    <td style="border:1px solid #ddd; padding:5px;"><span t-field="l.item_name"/></td>
+                                    <td style="border:1px solid #ddd; padding:5px;"><span t-field="l.item_code"/></td>
+                                    <td style="border:1px solid #ddd; padding:5px;"><span t-field="l.serial_number"/></td>
+                                    <td style="border:1px solid #ddd; padding:5px; text-align:center;"><span t-field="l.quantity"/></td>
+                                    <td style="border:1px solid #ddd; padding:5px;"><span t-field="l.movement_type"/></td>
+                                    <td style="border:1px solid #ddd; padding:5px;"><span t-field="l.condition"/></td>
+                                    <td style="border:1px solid #ddd; padding:5px;"><span t-field="l.notes"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4 style="color:#1a6fce; margin:12px 0 6px;">Motivo, resumen y observaciones</h4>
+                        <table style="width:100%; border-collapse:collapse; margin-bottom:10px;">
+                            <tr><td style="border:1px solid #ddd; padding:6px; background:#f5f5f5; width:25%;"><strong>Motivo</strong></td><td style="border:1px solid #ddd; padding:6px;"><span t-field="o.reason"/></td></tr>
+                            <tr><td style="border:1px solid #ddd; padding:6px; background:#f5f5f5;"><strong>Resumen</strong></td><td style="border:1px solid #ddd; padding:6px;"><span t-field="o.summary"/></td></tr>
+                            <tr><td style="border:1px solid #ddd; padding:6px; background:#f5f5f5;"><strong>Observaciones</strong></td><td style="border:1px solid #ddd; padding:6px;"><span t-field="o.observations"/></td></tr>
+                        </table>
+
+                        <div style="border:1px solid #ddd; background:#fafafa; padding:8px; margin-top:10px;">
+                            <strong>Responsabilidad:</strong><br/>
+                            <span t-field="o.warranty_text"/>
+                        </div>
+
+                        <h4 style="color:#1a6fce; margin:14px 0 6px;">Evidencias</h4>
+                        <table style="width:100%; border-collapse:collapse; margin-bottom:10px;">
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:6px; width:33%; text-align:center; vertical-align:top;">
+                                    <strong>Fotografía principal</strong><br/>
+                                    <img t-if="o.photo_main" t-att-src="image_data_uri(o.photo_main)" style="max-width:170px; max-height:140px; margin-top:6px;"/>
+                                </td>
+                                <td style="border:1px solid #ddd; padding:6px; width:33%; text-align:center; vertical-align:top;">
+                                    <strong>Documento / DPI</strong><br/>
+                                    <img t-if="o.photo_document" t-att-src="image_data_uri(o.photo_document)" style="max-width:170px; max-height:140px; margin-top:6px;"/>
+                                </td>
+                                <td style="border:1px solid #ddd; padding:6px; width:33%; text-align:center; vertical-align:top;">
+                                    <strong>Foto adicional</strong><br/>
+                                    <img t-if="o.photo_extra" t-att-src="image_data_uri(o.photo_extra)" style="max-width:170px; max-height:140px; margin-top:6px;"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <h4 style="color:#1a6fce; margin:14px 0 6px;">Firmas</h4>
+                        <table style="width:100%; border-collapse:collapse; margin-top:6px;">
+                            <tr>
+                                <td style="border:1px solid #ddd; padding:8px; height:130px; text-align:center; width:50%; vertical-align:bottom;">
+                                    <img t-if="o.signature_1" t-att-src="image_data_uri(o.signature_1)" style="max-width:230px; max-height:90px;"/><br/>
+                                    <strong>Firma responsable / supervisor</strong>
+                                </td>
+                                <td style="border:1px solid #ddd; padding:8px; height:130px; text-align:center; width:50%; vertical-align:bottom;">
+                                    <img t-if="o.signature_2" t-att-src="image_data_uri(o.signature_2)" style="max-width:230px; max-height:90px;"/><br/>
+                                    <strong>Firma receptor / guardia</strong>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

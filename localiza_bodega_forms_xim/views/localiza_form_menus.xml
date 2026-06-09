@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Se integra debajo del menú del módulo base si existe -->
+    <menuitem id="menu_localiza_forms_root" name="Formularios Operativos" sequence="40"/>
+    <menuitem id="menu_localiza_forms_all" name="Todos los formularios" parent="menu_localiza_forms_root" action="action_localiza_operational_form_all" sequence="1"/>
+    <menuitem id="menu_localiza_forms_delivery" name="Entrega desde Bodega" parent="menu_localiza_forms_root" action="action_localiza_form_delivery" sequence="10"/>
+    <menuitem id="menu_localiza_forms_installation" name="Instalación en Puesto" parent="menu_localiza_forms_root" action="action_localiza_form_installation" sequence="20"/>
+    <menuitem id="menu_localiza_forms_inventory" name="Inventario de Puesto" parent="menu_localiza_forms_root" action="action_localiza_form_inventory" sequence="30"/>
+    <menuitem id="menu_localiza_forms_tools" name="Préstamo de Herramientas" parent="menu_localiza_forms_root" action="action_localiza_form_tools" sequence="40"/>
+</odoo>

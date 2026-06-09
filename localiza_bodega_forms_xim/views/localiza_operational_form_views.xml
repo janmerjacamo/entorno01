@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_localiza_operational_form_list" model="ir.ui.view">
+        <field name="name">localiza.operational.form.list</field>
+        <field name="model">localiza.operational.form</field>
+        <field name="arch" type="xml">
+            <list string="Formularios Operativos">
+                <field name="name"/>
+                <field name="external_folio"/>
+                <field name="form_type"/>
+                <field name="form_date"/>
+                <field name="state"/>
+                <field name="puesto_id"/>
+                <field name="receiver_name"/>
+                <field name="equipment_serial"/>
+                <field name="line_count"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_localiza_operational_form_form" model="ir.ui.view">
+        <field name="name">localiza.operational.form.form</field>
+        <field name="model">localiza.operational.form</field>
+        <field name="arch" type="xml">
+            <form string="Formulario Operativo">
+                <header>
+                    <button name="action_validate" string="Validar" type="object" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_close" string="Cerrar" type="object" invisible="state not in ('validated', 'draft')"/>
+                    <button name="action_cancel" string="Cancelar" type="object" invisible="state == 'cancelled'"/>
+                    <button name="action_reset_draft" string="Volver a borrador" type="object" invisible="state == 'draft'"/>
+                    <button name="action_print_form" string="Imprimir formulario" type="object" class="btn-secondary"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,validated,closed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Datos del formulario">
+                            <field name="form_type"/>
+                            <field name="external_folio"/>
+                            <field name="form_date"/>
+                            <field name="source_system"/>
+                            <field name="active_user"/>
+                            <field name="location_text"/>
+                        </group>
+                        <group string="Puesto / destino">
+                            <field name="puesto_id"/>
+                            <field name="partner_id"/>
+                            <field name="source_place"/>
+                            <field name="destination_place"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Responsables">
+                            <field name="supervisor_name"/>
+                            <field name="delivery_responsible"/>
+                            <field name="receiver_name"/>
+                            <field name="installer_name"/>
+                            <field name="guard_name"/>
+                            <field name="dpi_receiver"/>
+                        </group>
+                        <group string="Equipo / control principal">
+                            <field name="equipment_serial"/>
+                            <field name="ammunition_qty"/>
+                            <field name="expiration_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Detalle de artículos">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="product_id"/>
+                                    <field name="category_text"/>
+                                    <field name="item_name"/>
+                                    <field name="item_code"/>
+                                    <field name="serial_number"/>
+                                    <field name="quantity"/>
+                                    <field name="movement_type"/>
+                                    <field name="condition"/>
+                                    <field name="accessory"/>
+                                    <field name="checked"/>
+                                    <field name="notes"/>
+                                </list>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="product_id"/>
+                                            <field name="category_text"/>
+                                            <field name="item_name"/>
+                                            <field name="item_code"/>
+                                            <field name="serial_number"/>
+                                            <field name="quantity"/>
+                                        </group>
+                                        <group>
+                                            <field name="movement_type"/>
+                                            <field name="condition"/>
+                                            <field name="accessory"/>
+                                            <field name="checked"/>
+                                            <field name="photo" filename="photo_filename" widget="image"/>
+                                            <field name="photo_filename" invisible="1"/>
+                                        </group>
+                                    </group>
+                                    <field name="notes"/>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Motivo / observaciones">
+                            <group>
+                                <field name="reason"/>
+                                <field name="summary"/>
+                                <field name="observations"/>
+                                <field name="warranty_text"/>
+                            </group>
+                        </page>
+                        <page string="Fotos y documentos">
+                            <group>
+                                <group>
+                                    <field name="photo_main" filename="photo_main_filename" widget="image"/>
+                                    <field name="photo_main_filename" invisible="1"/>
+                                    <field name="photo_document" filename="photo_document_filename" widget="image"/>
+                                    <field name="photo_document_filename" invisible="1"/>
+                                </group>
+                                <group>
+                                    <field name="photo_extra" filename="photo_extra_filename" widget="image"/>
+                                    <field name="photo_extra_filename" invisible="1"/>
+                                    <field name="original_pdf" filename="original_pdf_filename"/>
+                                    <field name="original_pdf_filename" invisible="1"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Firmas">
+                            <group>
+                                <group>
+                                    <field name="signature_1" filename="signature_1_filename" widget="image"/>
+                                    <field name="signature_1_filename" invisible="1"/>
+                                </group>
+                                <group>
+                                    <field name="signature_2" filename="signature_2_filename" widget="image"/>
+                                    <field name="signature_2_filename" invisible="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_localiza_operational_form_all" model="ir.actions.act_window">
+        <field name="name">Formularios Operativos</field>
+        <field name="res_model">localiza.operational.form</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_localiza_form_delivery" model="ir.actions.act_window">
+        <field name="name">Entregas desde Bodega</field>
+        <field name="res_model">localiza.operational.form</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('form_type','=','warehouse_delivery')]</field>
+        <field name="context">{'default_form_type': 'warehouse_delivery'}</field>
+    </record>
+
+    <record id="action_localiza_form_installation" model="ir.actions.act_window">
+        <field name="name">Instalaciones en Puesto</field>
+        <field name="res_model">localiza.operational.form</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('form_type','=','site_installation')]</field>
+        <field name="context">{'default_form_type': 'site_installation'}</field>
+    </record>
+
+    <record id="action_localiza_form_inventory" model="ir.actions.act_window">
+        <field name="name">Inventarios de Puesto</field>
+        <field name="res_model">localiza.operational.form</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('form_type','=','site_inventory')]</field>
+        <field name="context">{'default_form_type': 'site_inventory'}</field>
+    </record>
+
+    <record id="action_localiza_form_tools" model="ir.actions.act_window">
+        <field name="name">Préstamos de Herramientas</field>
+        <field name="res_model">localiza.operational.form</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('form_type','=','tool_loan')]</field>
+        <field name="context">{'default_form_type': 'tool_loan'}</field>
+    </record>
+</odoo>
