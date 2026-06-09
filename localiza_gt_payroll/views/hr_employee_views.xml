@@ -1,0 +1,24 @@
+<odoo>
+    <record id="view_hr_employee_form_localiza_gt" model="ir.ui.view">
+        <field name="name">hr.employee.form.localiza.gt</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Localiza GT">
+                    <group>
+                        <group string="Identificación Guatemala">
+                            <field name="localiza_dpi"/>
+                            <field name="localiza_nit"/>
+                            <field name="localiza_igss_number"/>
+                        </group>
+                        <group string="Planilla">
+                            <field name="localiza_bank_account"/>
+                            <field name="localiza_payroll_area"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

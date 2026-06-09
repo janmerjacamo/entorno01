@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_localiza_gt_payroll_parameter_user,localiza.gt.payroll.parameter.user,model_localiza_gt_payroll_parameter,hr_payroll.group_hr_payroll_user,1,1,1,1
+access_localiza_gt_payroll_batch_user,localiza.gt.payroll.batch.user,model_localiza_gt_payroll_batch,hr_payroll.group_hr_payroll_user,1,1,1,1
+access_localiza_gt_payroll_batch_line_user,localiza.gt.payroll.batch.line.user,model_localiza_gt_payroll_batch_line,hr_payroll.group_hr_payroll_user,1,1,1,1
+access_localiza_gt_settlement_user,localiza.gt.settlement.user,model_localiza_gt_settlement,hr_payroll.group_hr_payroll_user,1,1,1,1
+access_localiza_gt_settlement_salary_history_user,localiza.gt.settlement.salary.history.user,model_localiza_gt_settlement_salary_history,hr_payroll.group_hr_payroll_user,1,1,1,1
+access_localiza_gt_import_payroll_wizard_user,localiza.gt.import.payroll.wizard.user,model_localiza_gt_import_payroll_wizard,hr_payroll.group_hr_payroll_user,1,1,1,1

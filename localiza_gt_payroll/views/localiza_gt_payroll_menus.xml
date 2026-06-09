@@ -1,0 +1,25 @@
+<odoo>
+    <menuitem id="menu_localiza_gt_payroll_root" name="Localiza GT" parent="hr_payroll.menu_hr_payroll_root" sequence="90"/>
+
+    <record id="action_localiza_gt_payroll_batch" model="ir.actions.act_window">
+        <field name="name">Planillas Localiza</field>
+        <field name="res_model">localiza.gt.payroll.batch</field>
+        <field name="view_mode">list,form,pivot,graph</field>
+    </record>
+    <menuitem id="menu_localiza_gt_payroll_batch" name="Planillas" parent="menu_localiza_gt_payroll_root" action="action_localiza_gt_payroll_batch" sequence="10"/>
+
+    <record id="action_localiza_gt_settlement" model="ir.actions.act_window">
+        <field name="name">Liquidaciones</field>
+        <field name="res_model">localiza.gt.settlement</field>
+        <field name="view_mode">list,form,pivot,graph</field>
+    </record>
+    <menuitem id="menu_localiza_gt_settlement" name="Liquidaciones" parent="menu_localiza_gt_payroll_root" action="action_localiza_gt_settlement" sequence="20"/>
+
+    <record id="action_localiza_gt_payroll_parameter" model="ir.actions.act_window">
+        <field name="name">Parámetros Guatemala</field>
+        <field name="res_model">localiza.gt.payroll.parameter</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="menu_localiza_gt_config" name="Configuración GT" parent="menu_localiza_gt_payroll_root" sequence="90"/>
+    <menuitem id="menu_localiza_gt_parameter" name="Parámetros" parent="menu_localiza_gt_config" action="action_localiza_gt_payroll_parameter" sequence="10"/>
+</odoo>

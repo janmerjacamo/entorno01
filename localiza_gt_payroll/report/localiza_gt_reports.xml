@@ -1,0 +1,50 @@
+<odoo>
+    <record id="action_report_localiza_gt_settlement" model="ir.actions.report">
+        <field name="name">Liquidación Localiza GT</field>
+        <field name="model">localiza.gt.settlement</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">localiza_gt_payroll.report_localiza_gt_settlement</field>
+        <field name="report_file">localiza_gt_payroll.report_localiza_gt_settlement</field>
+        <field name="binding_model_id" ref="model_localiza_gt_settlement"/>
+        <field name="binding_type">report</field>
+    </record>
+    <template id="report_localiza_gt_settlement">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Liquidación Laboral - Localiza Guatemala</h2>
+                        <p><strong>Empleado:</strong> <span t-field="o.employee_id"/> | <strong>DPI:</strong> <span t-field="o.dpi"/></p>
+                        <p><strong>Ingreso:</strong> <span t-field="o.entry_date"/> | <strong>Salida:</strong> <span t-field="o.exit_date"/> | <strong>Motivo:</strong> <span t-field="o.reason"/></p>
+                        <h3>Promedio salarial</h3>
+                        <table class="table table-sm">
+                            <thead><tr><th>Fecha</th><th>Salario</th><th>Origen</th></tr></thead>
+                            <tbody>
+                                <tr t-foreach="o.salary_history_ids" t-as="l">
+                                    <td><span t-field="l.date"/></td>
+                                    <td class="text-end"><span t-field="l.amount"/></td>
+                                    <td><span t-field="l.source"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3>Desglose</h3>
+                        <table class="table table-sm">
+                            <tbody>
+                                <tr><td>Promedio últimos 6 meses</td><td class="text-end"><span t-field="o.average_salary"/></td></tr>
+                                <tr><td>Salario para indemnización</td><td class="text-end"><span t-field="o.indemnity_salary"/></td></tr>
+                                <tr><td>Salario pendiente</td><td class="text-end"><span t-field="o.pending_salary_amount"/></td></tr>
+                                <tr><td>Horas extras pendientes</td><td class="text-end"><span t-field="o.pending_overtime"/></td></tr>
+                                <tr><td>Indemnización</td><td class="text-end"><span t-field="o.indemnity_amount"/></td></tr>
+                                <tr><td>Bono 14 proporcional</td><td class="text-end"><span t-field="o.bono14_amount"/></td></tr>
+                                <tr><td>Aguinaldo proporcional</td><td class="text-end"><span t-field="o.aguinaldo_amount"/></td></tr>
+                                <tr><td>Vacaciones proporcionales</td><td class="text-end"><span t-field="o.vacation_amount"/></td></tr>
+                                <tr><td>IGSS</td><td class="text-end"><span t-field="o.igss_deduction"/></td></tr>
+                                <tr><td><strong>Líquido a recibir</strong></td><td class="text-end"><strong><span t-field="o.net_amount"/></strong></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

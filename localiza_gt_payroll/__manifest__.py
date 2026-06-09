@@ -1,0 +1,22 @@
+{
+    'name': 'Localiza GT Payroll - Nomina y Liquidaciones',
+    'version': '19.0.1.0.0',
+    'category': 'Human Resources/Payroll',
+    'summary': 'Planilla Localiza Guatemala, prestaciones, partida contable y liquidaciones con promedio de 6 meses.',
+    'author': 'XIM Technology / Localiza',
+    'license': 'LGPL-3',
+    'depends': ['hr_payroll_account', 'hr_holidays', 'account'],
+    'data': [
+        'security/ir.model.access.csv',
+        'data/localiza_gt_parameter_data.xml',
+        'views/localiza_gt_payroll_menus.xml',
+        'views/localiza_gt_parameter_views.xml',
+        'views/localiza_gt_payroll_batch_views.xml',
+        'views/localiza_gt_settlement_views.xml',
+        'views/hr_employee_views.xml',
+        'wizard/localiza_gt_import_payroll_views.xml',
+        'report/localiza_gt_reports.xml',
+    ],
+    'installable': True,
+    'application': False,
+}

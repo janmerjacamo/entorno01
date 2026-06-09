@@ -1,0 +1,42 @@
+<odoo>
+    <record id="view_localiza_gt_payroll_parameter_list" model="ir.ui.view">
+        <field name="name">localiza.gt.payroll.parameter.list</field>
+        <field name="model">localiza.gt.payroll.parameter</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="company_id"/>
+                <field name="igss_employee_rate"/>
+                <field name="igss_employer_rate"/>
+                <field name="irtra_rate"/>
+                <field name="intecap_rate"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_localiza_gt_payroll_parameter_form" model="ir.ui.view">
+        <field name="name">localiza.gt.payroll.parameter.form</field>
+        <field name="model">localiza.gt.payroll.parameter</field>
+        <field name="arch" type="xml">
+            <form string="Parámetros Guatemala">
+                <sheet>
+                    <group>
+                        <field name="company_id"/>
+                        <field name="currency_id"/>
+                    </group>
+                    <group string="Aportes y descuentos">
+                        <field name="igss_employee_rate"/>
+                        <field name="igss_employer_rate"/>
+                        <field name="irtra_rate"/>
+                        <field name="intecap_rate"/>
+                    </group>
+                    <group string="Prestaciones">
+                        <field name="bono14_rate"/>
+                        <field name="aguinaldo_rate"/>
+                        <field name="vacation_days"/>
+                        <field name="settlement_months_average"/>
+                        <field name="incentive_bonus_monthly"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

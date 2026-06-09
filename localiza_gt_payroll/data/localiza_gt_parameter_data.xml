@@ -1,0 +1,8 @@
+<odoo>
+    <record id="seq_localiza_gt_settlement" model="ir.sequence">
+        <field name="name">Liquidación Localiza GT</field>
+        <field name="code">localiza.gt.settlement</field>
+        <field name="prefix">LIQ-GT/%(year)s/</field>
+        <field name="padding">5</field>
+    </record>
+</odoo>

@@ -1,0 +1,89 @@
+<odoo>
+    <record id="view_localiza_gt_settlement_list" model="ir.ui.view">
+        <field name="name">localiza.gt.settlement.list</field>
+        <field name="model">localiza.gt.settlement</field>
+        <field name="arch" type="xml">
+            <list decoration-success="state == 'approved'" decoration-muted="state == 'cancel'">
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="entry_date"/>
+                <field name="exit_date"/>
+                <field name="reason"/>
+                <field name="average_salary"/>
+                <field name="total_benefits"/>
+                <field name="net_amount"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_localiza_gt_settlement_form" model="ir.ui.view">
+        <field name="name">localiza.gt.settlement.form</field>
+        <field name="model">localiza.gt.settlement</field>
+        <field name="arch" type="xml">
+            <form string="Liquidación Localiza">
+                <header>
+                    <button name="action_load_last_six_months" type="object" string="Cargar últimos 6 meses" class="btn-primary" invisible="state == 'approved'"/>
+                    <button name="action_compute" type="object" string="Calcular" invisible="state == 'approved'"/>
+                    <button name="action_approve" type="object" string="Aprobar" invisible="state != 'computed'"/>
+                    <button name="action_reset_draft" type="object" string="Volver a borrador" invisible="state == 'draft'"/>
+                    <button name="action_cancel" type="object" string="Cancelar" invisible="state == 'cancel'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,computed,approved"/>
+                </header>
+                <sheet>
+                    <div class="oe_title"><h1><field name="name" readonly="1"/></h1></div>
+                    <group string="Datos del trabajador">
+                        <group>
+                            <field name="company_id"/>
+                            <field name="employee_id"/>
+                            <field name="contract_id"/>
+                            <field name="dpi"/>
+                            <field name="job_name"/>
+                        </group>
+                        <group>
+                            <field name="calculation_date"/>
+                            <field name="reason"/>
+                            <field name="entry_date"/>
+                            <field name="exit_date"/>
+                            <field name="total_days_worked"/>
+                        </group>
+                    </group>
+                    <group string="Pendientes">
+                        <field name="pending_days"/>
+                        <field name="pending_salary_amount"/>
+                        <field name="pending_overtime"/>
+                    </group>
+                    <notebook>
+                        <page string="Promedio últimos 6 meses">
+                            <field name="salary_history_ids">
+                                <list editable="bottom">
+                                    <field name="date"/>
+                                    <field name="amount"/>
+                                    <field name="source"/>
+                                </list>
+                            </field>
+                            <group>
+                                <field name="average_salary"/>
+                                <field name="indemnity_salary"/>
+                            </group>
+                        </page>
+                        <page string="Desglose de liquidación">
+                            <group>
+                                <field name="indemnity_amount"/>
+                                <field name="bono14_amount"/>
+                                <field name="aguinaldo_amount"/>
+                                <field name="vacation_amount"/>
+                                <field name="igss_deduction"/>
+                                <field name="total_benefits"/>
+                                <field name="net_amount"/>
+                            </group>
+                        </page>
+                        <page string="Notas">
+                            <field name="notes" placeholder="Observaciones de liquidación..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+</odoo>

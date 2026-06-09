@@ -1,0 +1,91 @@
+<odoo>
+    <record id="view_localiza_gt_payroll_batch_list" model="ir.ui.view">
+        <field name="name">localiza.gt.payroll.batch.list</field>
+        <field name="model">localiza.gt.payroll.batch</field>
+        <field name="arch" type="xml">
+            <list decoration-success="state == 'approved'" decoration-muted="state == 'cancel'">
+                <field name="name"/>
+                <field name="batch_type"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="total_gross" sum="Total bruto"/>
+                <field name="total_net" sum="Líquido"/>
+                <field name="total_provision" sum="Provisión"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_localiza_gt_payroll_batch_form" model="ir.ui.view">
+        <field name="name">localiza.gt.payroll.batch.form</field>
+        <field name="model">localiza.gt.payroll.batch</field>
+        <field name="arch" type="xml">
+            <form string="Planilla Localiza">
+                <header>
+                    <button name="action_compute" type="object" string="Calcular" class="btn-primary" invisible="state not in ('draft','computed')"/>
+                    <button name="action_approve" type="object" string="Aprobar" invisible="state != 'computed'"/>
+                    <button name="action_reset_draft" type="object" string="Volver a borrador" invisible="state == 'draft'"/>
+                    <button name="action_cancel" type="object" string="Cancelar" invisible="state == 'cancel'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,computed,approved"/>
+                </header>
+                <sheet>
+                    <div class="oe_title"><h1><field name="name"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="company_id"/>
+                            <field name="batch_type"/>
+                        </group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="currency_id"/>
+                        </group>
+                    </group>
+                    <group string="Totales">
+                        <field name="total_gross"/>
+                        <field name="total_deductions"/>
+                        <field name="total_net"/>
+                        <field name="total_provision"/>
+                    </group>
+                    <notebook>
+                        <page string="Líneas de planilla">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="employee_id"/>
+                                    <field name="days_worked"/>
+                                    <field name="department_name"/>
+                                    <field name="job_name"/>
+                                    <field name="first_half_amount" optional="show"/>
+                                    <field name="base_salary"/>
+                                    <field name="incentive_bonus"/>
+                                    <field name="decree_bonus"/>
+                                    <field name="gross_total"/>
+                                    <field name="igss"/>
+                                    <field name="isr"/>
+                                    <field name="advances"/>
+                                    <field name="other_deductions"/>
+                                    <field name="net_amount"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Prestaciones y patronales">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="employee_id"/>
+                                    <field name="base_salary"/>
+                                    <field name="bono14_provision"/>
+                                    <field name="aguinaldo_provision"/>
+                                    <field name="indemnity_provision"/>
+                                    <field name="employer_igss"/>
+                                    <field name="irtra"/>
+                                    <field name="intecap"/>
+                                    <field name="provision_total"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+</odoo>
